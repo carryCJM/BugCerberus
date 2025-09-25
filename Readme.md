@@ -32,16 +32,73 @@ With BugCerberus, we further investigate the impact of bug localization precisio
 
 ---
 
-## Usage Instructions
+## Installation
 
-### 1. Install Dependencies
-Before running the training process, install the required dependencies using:
+### 1. Python Environment
+We recommend Python 3.10–3.11. Create a virtual environment and install dependencies:
 
 ```bash
+python3 -m venv .venv
+source .venv/bin/activate  
+pip install --upgrade pip setuptools wheel
 pip install -r requirements.txt
 ```
-### 2. Fine-tuning BugCerberus
-Navigate to the src directory and run the following command to fine-tune the BugCerberus model using LlamaFactory:
+### 2. Joern 
+
+[Joern](https://github.com/joernio/joern) is used to build Code Property Graphs (CPGs) for dependency analysis.
+
+**Download & Setup**
+```bash
+mkdir -p $HOME/tools && cd $HOME/tools
+wget https://github.com/joernio/joern/releases/latest/download/joern.zip
+unzip joern.zip -d joern
+export PATH="$HOME/tools/joern:$PATH"
+
+**Install Language Frontends**
+```bash
+joern-install.sh    # installs Java/Python frontends
+```
+#### Option A: CLI Commands
+This method directly calls Joern’s built-in commands:
+
+```bash
+# Step 1: Parse project into CPG
+./joern-parse /path/to/project --out cpg.bin
+
+# Step 2: Export to Neo4j CSV format
+./joern-export --repr=all --format=neo4jcsv --out neo4j-output-dir cpg.bin
+```
+#### Option B: Static Analysis Scripts
+Alternatively, you can rely on the helper scripts in the **Static Analysis** folder:
+
+- In **GenerateSDG.py**, the functions `generateNeo4jCSVs` and `generateNEO4J` provide batch interfaces for converting source projects into Neo4j-compatible dependency graphs.  
+- In **GenerateSlice.py**, the function `generateEntrance` provides a batch interface for slice generation based on the dependency graph.  
+
+### 3. LlamaFactory (Model Fine-Tuning)
+
+[LlamaFactory](https://github.com/hiyouga/LLaMA-Factory) provides an easy interface for training and inference of large models.
+
+**Option A: Install from PyPI**
+```bash
+pip install llamafactory
+```
+**Option B: Install from source **
+```bash
+git clone https://github.com/hiyouga/LLaMA-Factory.git
+cd LLaMA-Factory
+pip install -e ".[metrics]"
+cd ..
+```
+**Quick Test**
+```bash
+llamafactory-cli --help
+llamafactory webui   # Start Web UI (http://127.0.0.1:7860)
+```
+
+### Fine-tuning BugCerberus with LlamaFactory
+
+Navigate to the `src` directory and run the following command to fine-tune the BugCerberus model:
+
 ```bash
 llamafactory-cli train \
     --stage sft \
@@ -72,5 +129,7 @@ llamafactory-cli train \
     --plot_loss \
     --fp16
 ```
+
+
 ##Acknowledgments
 arts of the code are adapted from [Joern](https://github.com/joernio/joern) and [LlamaFactory](https://github.com/hiyouga/LLaMA-Factory).
