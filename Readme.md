@@ -97,7 +97,9 @@ llamafactory webui   # Start Web UI (http://127.0.0.1:7860)
 
 ### Fine-tuning BugCerberus with LlamaFactory
 
-Navigate to the `src` directory and run the following command to fine-tune the BugCerberus model:
+Following the data format required by [LlamaFactory](https://github.com/hiyouga/LLaMA-Factory), place your training dataset into the `dataset_dir` directory. Then run the following command to fine-tune the BugCerberus model:
+
+Navigate to the `src` directory and run:
 
 ```bash
 llamafactory-cli train \
