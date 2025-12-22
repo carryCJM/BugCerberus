@@ -12,7 +12,7 @@ All related files, including:
 
 These files can be downloaded from the following link:
 
-🔗 [Download Data and Checkpoints](https://zenodo.org/records/14949513?token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6ImZhYjE4NzAxLWVkYjItNGFhYy1hOTMzLTVhZjc2YmFhMjY3MSIsImRhdGEiOnt9LCJyYW5kb20iOiJkZTU2NTY1MGYxY2RmYTkyZDQ4ODZlYTI4ZjE5NjNiZCJ9.SFMKWftHrFb6nk8Yq0MPVGct1mZGsLYjogbYyPnr-fZclRzLvfunqJOI-5VG9Tbe_AzYDXqyiwrW588SVb45mw)  
+🔗 [Download Data and Checkpoints](https://www.alipan.com/s/wNRpNfF25mm)  
 
 ## Generating Additional Data
 
